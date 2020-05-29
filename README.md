@@ -1,5 +1,5 @@
 # cowsay-docker-light
 
-#Usage
+# Usage
 
 ```docker run -it --rm bartixxx32/cowsay "your message"```
