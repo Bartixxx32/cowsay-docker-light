@@ -14,7 +14,7 @@ RUN make
 
 FROM scratch
 ARG ARCH
-COPY --from=0 /Neo-cowsay/bin/cowsay .
+COPY --from=0 /go/Neo-cowsay/bin/cowsay .
 
 ENTRYPOINT ["./cowsay", ""]
 
