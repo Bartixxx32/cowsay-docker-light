@@ -11,8 +11,13 @@ COPY cow.c cow.c
 RUN apk update ; apk add gcc libc-dev
 RUN gcc cow.c -o cow
 
-FROM scratch
+FROM alpine:edge
 ARG ARCH
+<<<<<<< HEAD
 COPY --from=0 cow .
+=======
+COPY qemu-${ARCH}-static /usr/bin
+COPY --from=0 cowsay .
+>>>>>>> parent of 7074c97... Update Dockerfile-dockerhub
 
 ENTRYPOINT ["./cow", ""]
