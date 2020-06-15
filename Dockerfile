@@ -1,10 +1,8 @@
-FROM golang:alpine AS builder
-RUN apk update ; apk add git make
-RUN git clone https://github.com/Code-Hex/Neo-cowsay
-WORKDIR Neo-cowsay
-RUN make
+FROM alpine:edge AS builder
+RUN apk update ; apk add gcc
+RUN gcc cow.c -o cow
 
 FROM scratch
-COPY --from=0 /go/Neo-cowsay/bin/cowsay .
+COPY --from=0 cow .
 
-ENTRYPOINT ["./cowsay", ""]
+ENTRYPOINT ["./cow", ""]
