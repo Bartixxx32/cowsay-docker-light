@@ -5,6 +5,6 @@ WORKDIR Neo-cowsay
 RUN make
 
 FROM scratch
-COPY --from=0 /Neo-cowsay/bin/cowsay .
+COPY --from=0 /go/Neo-cowsay/bin/cowsay .
 
 ENTRYPOINT ["./cowsay", ""]
