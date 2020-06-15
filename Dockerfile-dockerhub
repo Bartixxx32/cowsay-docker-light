@@ -7,17 +7,12 @@ ARG ARCH
 COPY qemu-${ARCH}-static /usr/bin
 
 RUN uname -ar > /uname.build
-COPY cow.c cow.c
-RUN apk update ; apk add gcc libc-dev
-RUN gcc cow.c -o cow
+RUN apk update ; apk add wget
+RUN wget https://github.com/Code-Hex/Neo-cowsay/releases/download/v1.0.1/cowsay_v1.0.1_Linux_x86_64.tar.gz
+RUN tar -xf cowsay_v1.0.1_Linux_x86_64.tar.gz
 
-FROM alpine:edge
+FROM scratch
 ARG ARCH
-<<<<<<< HEAD
-COPY --from=0 cow .
-=======
-COPY qemu-${ARCH}-static /usr/bin
 COPY --from=0 cowsay .
->>>>>>> parent of 7074c97... Update Dockerfile-dockerhub
 
-ENTRYPOINT ["./cow", ""]
+ENTRYPOINT ["./cowsay", ""]
