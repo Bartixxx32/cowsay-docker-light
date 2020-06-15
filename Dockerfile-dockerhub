@@ -1,20 +1,17 @@
 # see hooks/build and hooks/.config
 ARG BASE_IMAGE_PREFIX
-FROM ${BASE_IMAGE_PREFIX}golang:alpine as builder
+FROM ${BASE_IMAGE_PREFIX}alpine:edge as builder
 
 # see hooks/post_checkout
 ARG ARCH
 COPY qemu-${ARCH}-static /usr/bin
 
 RUN uname -ar > /uname.build
-RUN apk update ; apk add git make
-RUN git clone https://github.com/Code-Hex/Neo-cowsay
-WORKDIR Neo-cowsay
-RUN make
+RUN apk update ; apk add gcc
+RUN gcc cow.c -o cow
 
 FROM scratch
 ARG ARCH
-COPY --from=0 /go/Neo-cowsay/bin/cowsay .
+COPY --from=0 cow .
 
-ENTRYPOINT ["./cowsay", ""]
-
+ENTRYPOINT ["./cow", ""]
