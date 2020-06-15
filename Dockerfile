@@ -1,5 +1,5 @@
 FROM golang:alpine AS builder
-RUN apk update ; apk add git make go
+RUN apk update ; apk add git make
 RUN git clone https://github.com/Code-Hex/Neo-cowsay
 WORKDIR Neo-cowsay
 RUN make
