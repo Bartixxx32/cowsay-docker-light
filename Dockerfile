@@ -1,4 +1,4 @@
-FROM alpine:edge AS builder
+FROM golang:alpine AS builder
 RUN apk update ; apk add git make go
 RUN git clone https://github.com/Code-Hex/Neo-cowsay
 WORKDIR Neo-cowsay
