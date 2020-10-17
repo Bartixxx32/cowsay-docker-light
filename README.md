@@ -1,7 +1,6 @@
 # cowsay-docker-light
 
-In this repo i tried my best to make Docker image smallest as possible, its size is around 1mb
-
+In this repo i tried my best to make Docker image smallest as possible, its size is around 1.12MB
 
 # Usage
 
