@@ -1,9 +1,10 @@
 FROM alpine:edge AS builder
-RUN apk update ; apk add wget
-RUN wget https://github.com/Code-Hex/Neo-cowsay/releases/download/v1.0.1/cowsay_v1.0.1_Linux_x86_64.tar.gz
-RUN tar -xf cowsay_v1.0.1_Linux_x86_64.tar.gz
+RUN apk update ; apk add git make go
+RUN git clone https://github.com/Code-Hex/Neo-cowsay
+WORKDIR Neo-cowsay
+RUN make
 
 FROM scratch
-COPY --from=0 cowsay .
+COPY --from=0 Neo-cowsay/bin/cowsay .
 
 ENTRYPOINT ["./cowsay", ""]
